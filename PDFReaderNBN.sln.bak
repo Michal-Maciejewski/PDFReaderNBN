@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PDFReaderNBN", "PDFReaderNBN\PDFReaderNBN.csproj", "{4FCAEBDA-66DB-47FA-9D4A-D15127FA7D8D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PDFReaderNBNTest", "PDFReaderNBNTest\PDFReaderNBNTest.csproj", "{B4AE9001-A7BB-4B63-9921-CE426FED06E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PDFReaderNBNTest", "PDFReadNBNTest\PDFReaderNBNTest.csproj", "{B4AE9001-A7BB-4B63-9921-CE426FED06E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
