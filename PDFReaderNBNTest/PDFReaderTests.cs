@@ -9,7 +9,7 @@ namespace PDFReadNBNTest
         private string FilePath { get; set; } = "";
         private readonly PDFReader PDFReader = new();
 
-        [SetUp]
+        [OneTimeSetUp]
         public void Setup()
         {
             IConfiguration configuration;
@@ -23,6 +23,19 @@ namespace PDFReadNBNTest
 
         [TestCase("Test1.pdf")]
         public void PDFReader_GetAssetsFromPDF_FilePath_ReturnsValidList(string fileName)
+        {
+            var filePath = FilePath + fileName;
+            var expectedCount = 57;
+
+            var list = PDFReader.GetAssetsFromPDF(filePath);
+            Assert.NotNull(list);
+
+            var actualCount = list.Count;
+            Assert.AreEqual(expectedCount, actualCount);
+        }
+
+        [TestCase("Test2.pdf")]
+        public void PDFReader_GetAssetsFromPDF_FilePath_ReturnsValidListLargeFile(string fileName)
         {
             var filePath = FilePath + fileName;
             var expectedCount = 57;
