@@ -9,9 +9,9 @@ namespace PDFReaderNBN
     {
         private const string NBNRegex = @"\d[A-z]{3}-\d{2}-\d{2}-[A-z]{3}-\d{3}|\d[A-z]{3}-\d{2}-\d{3}-[A-z]{3}-\d{4}";
         private readonly Regex NBNRegexFinder = new(NBNRegex, RegexOptions.Compiled);
-        private List<string> NBNAssests { get; set; } = new List<string>();
+        private HashSet<string> NBNAssests { get; set; } = new HashSet<string>();
 
-        public List<string> GetAssetsFromPDF(FileInfo fileData)
+        public HashSet<string> GetAssetsFromPDF(FileInfo fileData)
         {
             using (var pdfReader = new PdfReader(fileData))
             {
@@ -21,7 +21,7 @@ namespace PDFReaderNBN
             return NBNAssests;
         }
 
-        public List<string> GetAssetsFromPDF(MemoryStream fileData)
+        public HashSet<string> GetAssetsFromPDF(MemoryStream fileData)
         {
             using (var pdfReader = new PdfReader(fileData))
             {
@@ -31,7 +31,7 @@ namespace PDFReaderNBN
             return NBNAssests;
         }
 
-        public List<string> GetAssetsFromPDF(string filePath)
+        public HashSet<string> GetAssetsFromPDF(string filePath)
         {
             using (var pdfReader = new PdfReader(filePath))
             {
@@ -41,7 +41,7 @@ namespace PDFReaderNBN
             return NBNAssests;
         }
 
-        public List<string> GetAssetsFromPDF(MemoryStream fileData, ReaderProperties readerProperties)
+        public HashSet<string> GetAssetsFromPDF(MemoryStream fileData, ReaderProperties readerProperties)
         {
             using (var pdfReader = new PdfReader(fileData, readerProperties))
             {
@@ -51,7 +51,7 @@ namespace PDFReaderNBN
             return NBNAssests;
         }
 
-        public List<string> GetAssetsFromPDF(string filePath, ReaderProperties readerProperties)
+        public HashSet<string> GetAssetsFromPDF(string filePath, ReaderProperties readerProperties)
         {
             using (var pdfReader = new PdfReader(filePath, readerProperties))
             {
@@ -76,10 +76,8 @@ namespace PDFReaderNBN
 
                 var listOfAssestInPage = NBNRegexFinder.Matches(currentText);
 
-                NBNAssests.AddRange(listOfAssestInPage.Select(a => a.Value).ToList());
+                NBNAssests.UnionWith(listOfAssestInPage.Select(a => a.Value).ToList());
             }
-
-            NBNAssests = NBNAssests.Distinct().ToList();
         }
     }
 }
